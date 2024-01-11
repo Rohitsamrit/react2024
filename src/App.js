@@ -1,23 +1,24 @@
 import "./App.css";
+import videos from "./data/data";
 
 import Video from "./components/video";
 function App() {
-  let obj={
-    title:"React video",
-        channel:"Raj_Kundra",
-        views:"10000K",
-        time:"45 minutes ago"
-
-  }
+  
   return (
     <div className="App">
-      <Video {...obj}></Video>
-      <Video
-        title="Node video"
-        channel="Rohit-tech"
-        views="10M"
-        time="4 minutes ago"
+     {
+      videos.map(video =>
+        <Video
+        key={video.id}
+        title={video.title}
+        channel={video.channel}
+        views={video.views}
+        time={video.time}
+        verified={video.verified}
+        id={video.id}
       ></Video>
+      )
+     }
     </div>
   );
 }
