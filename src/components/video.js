@@ -6,7 +6,7 @@ function Video({title,channel="Rajat",views,time}) {
 
     <div className="container">
       <div className="pic">
-      <img src="https://i.imgur.com/MK3eW3Am.jpg" alt="Katherine Johnson" />
+      <img src="https://loremflickr.com/640/360" alt="Katherine Johnson" />
       </div>
       <div className="title">{title}</div>
       <div className="channel">{channel}</div>
