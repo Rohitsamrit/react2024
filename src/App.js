@@ -1,25 +1,24 @@
+import "./App.css";
 
-import './App.css';
-
+import Video from "./components/video";
 function App() {
-  return (
-    <div className="App">
-    <div className="App-header">
-     <h1>Hello world1</h1>
-     
-     </div>
-     <Demo/>
-    </div>
-  );
-}
-function Demo() {
-  return (
-    <div className="App">
-    <div className="App-header">
-     <h1>demo</h1>
-     </div>
-    </div>
-  );
-}
+  let obj={
+    title:"React video",
+        channel:"Raj_Kundra",
+        views:"10000K",
+        time:"45 minutes ago"
 
+  }
+  return (
+    <div className="App">
+      <Video {...obj}></Video>
+      <Video
+        title="Node video"
+        channel="Rohit-tech"
+        views="10M"
+        time="4 minutes ago"
+      ></Video>
+    </div>
+  );
+}
 export default App;
