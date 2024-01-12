@@ -1,13 +1,22 @@
 import "./App.css";
-import videos from "./data/data";
+import videoDb from "./data/data";
 
 import Video from "./components/video";
 import PlayButton from "./components/PlayButton";
-// import { clear } from "@testing-library/user-event/dist/clear";
+// import Counter from "./components/counter";
+import { useState } from "react";
+import Addvideo from "./components/Addvideo";
+
 function App() {
+  
+  const [videos, setvideos] = useState(videoDb);
+  function addVideos(video){
+    setvideos([...videos, {...video,id:videos.length+1}]);
+  }
   return (
     <>
       <div className="App">
+      <Addvideo addVideos={addVideos}></Addvideo>
         {videos.map((video) => (
           <Video
             key={video.id}
@@ -15,11 +24,18 @@ function App() {
             channel={video.channel}
             views={video.views}
             time={video.time}
-            gi
+            
             verified={video.verified}
             id={video.id}
           >
-            <PlayButton  message="Play Video" onPlay={()=>console.log("Playing...",video.title)} onPause={()=>console.log("Paused...",video.title)}>{video.title}</PlayButton>
+            <PlayButton
+              message="Play Video"
+              onPlay={() => console.log("Playing...", video.title)}
+              onPause={() => console.log("Paused...", video.title)}
+            >
+              {video.title}
+            </PlayButton>
+            {/* <Counter></Counter> */}
           </Video>
         ))}
       </div>
