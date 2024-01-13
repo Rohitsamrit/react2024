@@ -1,45 +1,45 @@
 import "./App.css";
 import videoDb from "./data/data";
 
-import Video from "./components/video";
-import PlayButton from "./components/PlayButton";
-// import Counter from "./components/counter";
+
+
+
 import { useState } from "react";
 import Addvideo from "./components/Addvideo";
+import VideoList from './components/VideoList';
 
 function App() {
   
   const [videos, setvideos] = useState(videoDb);
+  const [editablevideo,seteditablevideo]=useState(null)
   function addVideos(video){
     setvideos([...videos, {...video,id:videos.length+1}]);
   }
+  function deletevideo(id){
+    setvideos(videos.filter(video=>video.id!==id))
+   
+  }
+  function editvideo(id){
+    seteditablevideo(videos.find(video=>video.id===id))
+  
+  }
+  function updatevideo(video){
+    const index=videos.findIndex(v=>v.id===video.id);
+    const newVideos=[...videos]
+    newVideos.splice(index,1,video);
+    setvideos(newVideos);
+
+
+  }
+  
   return (
-    <>
-      <div className="App">
-      <Addvideo addVideos={addVideos}></Addvideo>
-        {videos.map((video) => (
-          <Video
-            key={video.id}
-            title={video.title}
-            channel={video.channel}
-            views={video.views}
-            time={video.time}
-            
-            verified={video.verified}
-            id={video.id}
-          >
-            <PlayButton
-              message="Play Video"
-              onPlay={() => console.log("Playing...", video.title)}
-              onPause={() => console.log("Paused...", video.title)}
-            >
-              {video.title}
-            </PlayButton>
-            {/* <Counter></Counter> */}
-          </Video>
-        ))}
-      </div>
-    </>
+    <div className="App" onClick={()=>console.log('App')}>
+       <Addvideo addVideos={addVideos} updatevideo={updatevideo} editablevideo={editablevideo}></Addvideo>
+       <VideoList deletevideo={deletevideo} editvideo={editvideo} videos={videos}></VideoList>
+
+
+    </div>
   );
+
 }
 export default App;
